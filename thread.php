@@ -8,10 +8,10 @@ class ThreadTask extends Shell
 	public $logFile = '/tmp/thread.log';
 	
 	public function processExec($commandJob) { 
-        $command = $commandJob.' > '.$logFile.' 2>&1 & echo $!';
+        $command = $commandJob.' > '.$this->logFile.' 2>&1 & echo $!';
         exec($command ,$op); 
         $pid = (int)$op[0]; 
-        if ($pid!="") {
+        if ($pid != "") {
 	        return $pid; 
         }
         return false; 
@@ -35,7 +35,7 @@ class ThreadTask extends Shell
 		}
 		
 		if (count($this->pids) >= $this->processLimit) {
-			$this->log("Wait : Count process running: ".count($this->pids), true);
+			$this->log("Wait : Count process running: ".count($this->pids));
 			sleep($this->secondsWait);
 			$this->checkLimitProcess();
 		}

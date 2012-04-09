@@ -5,9 +5,10 @@ class ThreadTask extends Shell
 	public $pids = array();
 	public $processLimit = 20;
 	public $secondsWait = 5;
+	public $logFile = '/tmp/thread.log';
 	
 	public function processExec($commandJob) { 
-        $command = $commandJob.' > /tmp/consolidacao.log 2>&1 & echo $!';
+        $command = $commandJob.' > '.$logFile.' 2>&1 & echo $!';
         exec($command ,$op); 
         $pid = (int)$op[0]; 
         if ($pid!="") {
